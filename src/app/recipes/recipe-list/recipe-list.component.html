@@ -6,23 +6,8 @@
 <br>
 <div class="row">
   <div class="col-xs-12">
-    <a
-      style="margin-bottom: 25px"
-      href="#"
-      class="list-group-item"
-      *ngFor="let recipe of recipes"
-    >
-      <div class="card-body">
-        <h4 class="card-text">{{recipe.name}}</h4>
-        <p class="card-text">{{recipe.description}}</p>
-      </div>
-      <img
-        [src]="recipe.imagePath"
-        alt="{{recipe.name}}"
-        class="card-img-bottom"
-        [style]="{maxHeight: '50px'}"
-      >
-    </a>
+    <app-recipe-item
+      *ngFor="let recipeEl of recipes" [recipe]="recipeEl"
+    ></app-recipe-item>
   </div>
-  <app-recipe-item></app-recipe-item>
 </div>

@@ -1,1 +1,16 @@
-<p>recipe-item works!</p>
+<a
+  style="margin-bottom: 25px"
+  href="#"
+  class="list-group-item"
+>
+  <div class="card-body">
+    <h4 class="card-text">{{recipe.name}}</h4>
+    <p class="card-text">{{recipe.description}}</p>
+  </div>
+  <img
+    src="{{recipe.imagePath}}"
+    alt="{{recipe.name}}"
+    class="card-img-bottom"
+    [style]="{maxHeight: '50px'}"
+  >
+</a>
