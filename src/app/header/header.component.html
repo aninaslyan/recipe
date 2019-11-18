@@ -14,17 +14,23 @@
         <a class="nav-link" (click)="onMenuItemClick('shopping-list')">Shopping List</a>
       </li>
     </ul>
-    <ul class="nav navbar-nav navbar-right">
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-           aria-haspopup="true" aria-expanded="false">
-          Manage
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Save Data</a>
-          <a class="dropdown-item" href="#">Fetch Data</a>
-        </div>
-      </li>
-    </ul>
+    <div
+      class="btn-group"
+      #r="appDropDown"
+      appDropDown
+    >
+      <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+        Manage
+        <span class="caret"></span></button>
+      <ul
+        class="dropdown-menu dropdown-menu-right"
+        [ngClass]="{'show':r.isOpen}"
+      >
+        <li><a class="dropdown-item" style="cursor: pointer"
+        >To Shopping List</a></li>
+        <li><a class="dropdown-item" href="#">Save Data</a></li>
+        <li><a class="dropdown-item" href="#">Fetch Data</a></li>
+      </ul>
+    </div>
   </div>
 </nav>

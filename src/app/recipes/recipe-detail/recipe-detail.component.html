@@ -16,18 +16,26 @@
 </div>
 <div class="row">
   <div class="col-xs-12">
-    <div class="btn-group">
+    <div
+      class="btn-group"
+      #r="appDropDown"
+      appDropDown
+    >
       <button
         type='button'
         class="btn btn-primary dropdown-toggle"
       >
         Manage Recipe <span class="caret"></span>
       </button>
-      <ul class="dropdown-menu">
-        <li><a href="#">To Shopping List</a></li>
-        <li><a href="#">Edit Recipe</a></li>
-        <li><a href="#">Delete Recipe</a></li>
-      </ul>
+      <div
+        class="dropdown-menu"
+        aria-labelledby="dropdownMenuButton"
+        [ngClass]="{'show':r.isOpen}"
+      >
+        <a class="dropdown-item" href="#">Action</a>
+        <a class="dropdown-item" href="#">Another action</a>
+        <a class="dropdown-item" href="#">Something else here</a>
+      </div>
     </div>
   </div>
 </div>
