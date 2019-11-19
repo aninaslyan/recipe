@@ -1,12 +1,14 @@
-import { EventEmitter } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 
 import { Recipe } from './recipe.model';
 import { Ingredient } from '../shared/ingredients.model';
+import { ShoppingListService } from '../shopping-list/shopping-list.service';
 
+@Injectable()
 export class RecipeService {
   recipeSelected = new EventEmitter<Recipe>();
 
-  constructor() {
+  constructor(private shoppingListService: ShoppingListService) {
   }
 
   private recipes: Recipe[] = [
@@ -16,7 +18,8 @@ export class RecipeService {
       'https://www.maxpixel.net/static/photo/1x/Menu-Tasty-Cake-Sweet-Food-Tiramisu-Dessert-3338312.jpg',
       [
         new Ingredient('Cheese', 8),
-        new Ingredient('Cookie', 2)
+        new Ingredient('Cookie', 2),
+        new Ingredient('Milk', 1)
       ]
     ),
     new Recipe(
@@ -32,5 +35,9 @@ export class RecipeService {
 
   getRecipes() {
     return this.recipes.slice(); // copying
+  }
+
+  addIngredientsToShoppingList(ingredients: Ingredient[]) {
+    this.shoppingListService.addIngredients(ingredients);
   }
 }

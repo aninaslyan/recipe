@@ -32,9 +32,12 @@
         aria-labelledby="dropdownMenuButton"
         [ngClass]="{'show':r.isOpen}"
       >
-        <a class="dropdown-item" href="#">Action</a>
-        <a class="dropdown-item" href="#">Another action</a>
-        <a class="dropdown-item" href="#">Something else here</a>
+        <a class="dropdown-item"
+           style="cursor:pointer;"
+           (click)="onAddToChoppingList()"
+        >To Shopping List</a>
+        <a class="dropdown-item" href="#">Edit Recipe</a>
+        <a class="dropdown-item" href="#">Delete Recipe</a>
       </div>
     </div>
   </div>

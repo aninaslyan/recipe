@@ -17,8 +17,13 @@ export class ShoppingListService {
     return this.ingredients.slice(); // remove slice if you want to edit our old ingredient instead of new ingredient (preferred way)
   }
 
-  addIngredient(ingredient) {
-    this.ingredients.push(new Ingredient(ingredient.name, ingredient.amount));
+  addIngredient(ingredient: Ingredient) {
+    this.ingredients.push(ingredient);
+    this.ingredientChanged.emit(this.ingredients.slice());
+  }
+
+  addIngredients(ingredients: Ingredient[]) {
+    this.ingredients.push(...ingredients);
     this.ingredientChanged.emit(this.ingredients.slice());
   }
 }
