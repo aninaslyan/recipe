@@ -9,8 +9,8 @@ export class ShoppingListService {
   }
 
   private ingredients = [
-    new Ingredient('flour', 2),
-    new Ingredient('sugar', 1.5)
+    new Ingredient('Flour', 2),
+    new Ingredient('Sugar', 1.5)
   ];
 
   getIngredients() {
@@ -18,6 +18,15 @@ export class ShoppingListService {
   }
 
   addIngredient(ingredient: Ingredient) {
+    // in case the product already exists
+    // console.log(ingredient);
+    // for (const val of this.ingredients) {
+    //   if (val.name === ingredient.name) {
+    //     val.amount = ingredient.amount;
+    //     return this.ingredientChanged.emit(this.ingredients.slice());
+    //   }
+    // }
+
     this.ingredients.push(ingredient);
     this.ingredientChanged.emit(this.ingredients.slice());
   }

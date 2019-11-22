@@ -19,7 +19,8 @@ export class RecipeService {
       [
         new Ingredient('Cheese', 8),
         new Ingredient('Cookie', 2),
-        new Ingredient('Milk', 1)
+        new Ingredient('Milk', 1),
+        new Ingredient('Flour', 8)
       ]
     ),
     new Recipe(
