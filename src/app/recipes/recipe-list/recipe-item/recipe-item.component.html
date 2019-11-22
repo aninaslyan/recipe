@@ -1,7 +1,7 @@
 <a
   style="margin-bottom: 25px; cursor: pointer"
-  (click)="onSelected()"
   class="list-group-item"
+  [routerLink]="[index]"
 >
   <div class="card-body">
     <h4 class="card-text">{{recipe.name}}</h4>
