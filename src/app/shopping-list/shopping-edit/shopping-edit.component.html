@@ -1,6 +1,6 @@
 <form
     #f='ngForm'
-    (ngSubmit)="onSubmit(f)"
+    (ngSubmit)="onSubmit()"
 >
   <div class="row">
     <div class="col-sm-5 form-group">
@@ -33,6 +33,16 @@
     type="submit"
     [disabled]="!f.valid"
   >{{editMode?'Update':'Add'}}</button>
-  <button class="btn btn-danger" [ngClass]="'button-margin'" type="button">Delete Item</button>
-  <button class="btn btn-primary" [ngClass]="'button-margin'" type="button">Clear</button>
+  <button
+    class="btn btn-danger"
+    [ngClass]="'button-margin'"
+    type="button"
+    (click)="onDeleteItem()"
+  >Delete Item</button>
+  <button
+    class="btn btn-primary"
+    [ngClass]="'button-margin'"
+    type="button"
+    (click)="onClearForm()"
+  >Clear</button>
 </form>
