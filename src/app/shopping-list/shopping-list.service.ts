@@ -4,6 +4,7 @@ import { Subject } from 'rxjs';
 export class ShoppingListService {
   // inform our component that a new data is available
   ingredientChanged = new Subject<Ingredient[]>();
+  startedEditing = new Subject<number>();
 
   constructor() {
   }
@@ -18,21 +19,27 @@ export class ShoppingListService {
   }
 
   addIngredient(ingredient: Ingredient) {
-    // in case the product already exists
-    // console.log(ingredient);
-    // for (const val of this.ingredients) {
-    //   if (val.name === ingredient.name) {
-    //     val.amount = ingredient.amount;
-    //     return this.ingredientChanged.emit(this.ingredients.slice());
-    //   }
-    // }
-
+    for(const ing of this.ingredients) {
+      if(ing.name.toLowerCase() === ingredient.name.toLowerCase()) {
+        ing.amount = ing.amount + ingredient.amount;
+        return this.ingredientChanged.next(this.ingredients.slice());
+      }
+    }
     this.ingredients.push(ingredient);
+    this.ingredientChanged.next(this.ingredients.slice());
+  }
+
+  updateIngredient(index: number, ingredient: Ingredient) {
+    this.ingredients[index] = ingredient;
     this.ingredientChanged.next(this.ingredients.slice());
   }
 
   addIngredients(ingredients: Ingredient[]) {
     this.ingredients.push(...ingredients);
     this.ingredientChanged.next(this.ingredients.slice());
+  }
+
+  getIngredient(index: number) {
+    return this.ingredients[index];
   }
 }
