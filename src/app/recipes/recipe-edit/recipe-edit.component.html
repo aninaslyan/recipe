@@ -5,7 +5,11 @@
 >
   <div class="row">
     <div class="col-sx-12">
-      <button type="submit" class="btn btn-success margin-right">Save</button>
+      <button
+        type="submit"
+        class="btn btn-success margin-right"
+        [disabled]="!recipeForm.valid"
+      >Save</button>
       <button type="button" class="btn btn-info margin-right">Cancel</button>
     </div>
   </div>
@@ -20,6 +24,10 @@
           class="form-control"
           formControlName="name"
         >
+        <span
+          class="errorColor"
+          *ngIf="recipeForm.controls.name.errors?recipeForm.controls.name.errors.required:false"
+        >Name field is required</span>
       </div>
     </div>
   </div>
@@ -33,6 +41,10 @@
           class="form-control"
           formControlName="imagePath"
         >
+        <span
+          class="errorColor"
+          *ngIf="recipeForm.controls.imagePath.errors?recipeForm.controls.imagePath.errors.required:false"
+        >ImagePath field is required</span>
       </div>
     </div>
   </div>
@@ -52,6 +64,10 @@
           rows="6"
           formControlName="description"
         ></textarea>
+        <span
+          class="errorColor"
+          *ngIf="recipeForm.controls.description.errors?recipeForm.controls.description.errors.required:false"
+        >Description field is required</span>
       </div>
     </div>
   </div>
