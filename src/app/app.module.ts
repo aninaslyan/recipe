@@ -29,7 +29,6 @@ import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component
     RecipeDetailComponent,
     RecipesComponent,
     DropdownDirective,
-    DropdownDirective,
     RecipeStartComponent,
     RecipeEditComponent
   ],
