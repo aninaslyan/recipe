@@ -10,7 +10,11 @@
         class="btn btn-success margin-right"
         [disabled]="!recipeForm.valid"
       >Save</button>
-      <button type="button" class="btn btn-info margin-right">Cancel</button>
+      <button
+        type="button"
+        class="btn btn-info margin-right"
+        (click)="onNavigateClick()"
+      >Cancel</button>
     </div>
   </div>
   <br>
@@ -40,6 +44,7 @@
           id="imagePath"
           class="form-control"
           formControlName="imagePath"
+          #imagePath
         >
         <span
           class="errorColor"
@@ -50,9 +55,13 @@
   </div>
   <div class="row">
     <div class="col-xs-12">
-      <img src="" class="img-responsive">
+      <img
+        style="width: 40%"
+        [src]="imagePath.value"
+        class="img-responsive">
     </div>
   </div>
+  <br>
   <div class="row">
     <div class="col-xs-12">
       <div class="form-group">
@@ -96,7 +105,11 @@
           >
         </div>
         <div class="col-xs-2">
-          <button class="btn btn-danger margin-right">X</button>
+          <button
+            (click)="onDeleteIngredient(i)"
+            type="button"
+            class="btn btn-danger margin-right"
+          >X</button>
         </div>
       </div>
       <div class="row">
