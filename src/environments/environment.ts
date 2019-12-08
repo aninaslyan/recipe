@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'https://course-recipe-d24f0.firebaseio.com/recipes.json'
+  apiUrl: 'https://course-recipe-d24f0.firebaseio.com/recipes.json',
+  userUrl: 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyB75SXf05JNIROLagLLIf_oN_Gn2bzLhsA'
 };
 
 /*
