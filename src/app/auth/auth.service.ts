@@ -5,7 +5,7 @@ import { catchError, tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 
 import { environment } from '../../environments/environment';
-import { User } from './user.model';
+import { IUser, User } from './user.model';
 
 export interface IAuthResponseData {
   idToken: string;
@@ -19,6 +19,7 @@ export interface IAuthResponseData {
 @Injectable({providedIn: 'root'})
 export class AuthService {
   user = new BehaviorSubject<User>(null);
+  private tokenExpirationTimer: any;
 
   constructor(private http: HttpClient, private router: Router) {
   }
@@ -60,6 +61,29 @@ export class AuthService {
       expirationDate)
     ;
     this.user.next(user);
+    this.autoLogOut(expiresIn * 1000);
+    localStorage.setItem('userData', JSON.stringify(user));
+  }
+
+  autoLogin() {
+    const userData: IUser = JSON.parse(localStorage.getItem('userData'));
+
+    if (!userData) {
+      return;
+    }
+    const loadedUser = new User(userData.email, userData.id, userData._token, new Date(userData._tokenExpirationDate));
+
+    if (loadedUser.token) {
+      this.user.next(loadedUser);
+      const expirationDuration = new Date(userData._tokenExpirationDate).getTime() - new Date().getTime();
+      this.autoLogOut(expirationDuration);
+    }
+  }
+
+  autoLogOut(expirationDuration: number) {
+    this.tokenExpirationTimer = setTimeout(() => {
+      this.logOut();
+    }, expirationDuration);
   }
 
   signUp(email: string, password: string) {
@@ -91,5 +115,10 @@ export class AuthService {
   logOut() {
     this.user.next(null);
     this.router.navigate(['/auth']);
+    localStorage.removeItem('userData');
+    if(this.tokenExpirationTimer) {
+      clearTimeout(this.tokenExpirationTimer);
+    }
+    this.tokenExpirationTimer = null;
   }
 }
