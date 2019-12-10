@@ -12,6 +12,7 @@
           routerLink="recipes"
           class="nav-link"
           routerLinkActive="activeClass"
+          *ngIf="isAuthenticated"
         >Recipes</a>
       </li>
       <li class="nav-item">
@@ -19,6 +20,7 @@
           routerLink="auth"
           class="nav-link"
           routerLinkActive="activeClass"
+          *ngIf="!isAuthenticated"
         >Authenticate</a>
       </li>
       <li class="nav-item">
@@ -29,14 +31,23 @@
         >Shopping List</a>
       </li>
     </ul>
+    <button
+      type='button'
+      class="btn btn-info button-margin"
+      style='cursor: pointer'
+      *ngIf="isAuthenticated"
+    >Log Out
+    </button>
     <div
       class="btn-group"
       #r="appDropDown"
+      *ngIf="isAuthenticated"
       appDropDown
     >
       <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
         Manage
-        <span class="caret"></span></button>
+        <span class="caret"></span>
+      </button>
       <ul
         class="dropdown-menu dropdown-menu-right"
         [ngClass]="{'show':r.isOpen}"

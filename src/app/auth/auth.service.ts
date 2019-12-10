@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { BehaviorSubject, throwError } from 'rxjs';
+import { catchError, tap } from 'rxjs/operators';
 
 import { environment } from '../../environments/environment';
+import { User } from './user.model';
 
 export interface IAuthResponseData {
   idToken: string;
@@ -16,13 +17,15 @@ export interface IAuthResponseData {
 
 @Injectable({providedIn: 'root'})
 export class AuthService {
+  user = new BehaviorSubject<User>(null);
+
   constructor(private http: HttpClient) {
   }
 
   private static handleError(errorRes: HttpErrorResponse) {
     let errorMessage = 'An unknown error occurred';
 
-    if(!errorRes.error || !errorRes.error.error) {
+    if (!errorRes.error || !errorRes.error.error) {
       return throwError(errorMessage);
     }
 
@@ -47,13 +50,28 @@ export class AuthService {
     return throwError(errorMessage);
   }
 
+  private handleAuthentication(email: string, id: string, token: string, expiresIn: number) {
+    const expirationDate = new Date(new Date().getTime() + expiresIn * 1000);
+    const user = new User(
+      email,
+      id,
+      token,
+      expirationDate)
+    ;
+    this.user.next(user);
+  }
+
   signUp(email: string, password: string) {
     return this.http.post<IAuthResponseData>(environment.userSignUp, {
       email,
       password,
       returnSecureToken: true
     })
-    .pipe(catchError(AuthService.handleError));
+      .pipe(catchError(AuthService.handleError),
+        tap(resData => {
+          this.handleAuthentication(resData.email, resData.localId, resData.idToken, +resData.expiresIn);
+        })
+      );
   }
 
   logIn(email: string, password: string) {
@@ -62,6 +80,10 @@ export class AuthService {
       password,
       returnSecureToken: true
     })
-    .pipe(catchError(AuthService.handleError));
+      .pipe(catchError(AuthService.handleError),
+        tap(resData => {
+          this.handleAuthentication(resData.email, resData.localId, resData.idToken, +resData.expiresIn);
+        })
+      );
   }
 }
