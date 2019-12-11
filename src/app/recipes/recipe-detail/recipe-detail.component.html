@@ -17,6 +17,7 @@
     <div class="col-xs-12">
       <div
         class="btn-group"
+        #r="appDropDown"
         appDropDown
       >
         <button
@@ -28,6 +29,7 @@
         <div
           class="dropdown-menu"
           aria-labelledby="dropdownMenuButton"
+          [ngClass]="{'show':r.isOpen}"
         >
           <a
             class="dropdown-item"
