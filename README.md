@@ -12,4 +12,4 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 
 ## Hosted App
 
-You can find hosted app by navigating to [Recipe App](https://course-recipe-d24f0.firebaseapp.com/shopping-list). The app is hosted in firebase.
+You can find hosted app by navigating to [Recipe App](https://course-recipe-d24f0.firebaseapp.com). The app is hosted in firebase.
