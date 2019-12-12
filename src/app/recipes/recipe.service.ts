@@ -15,8 +15,8 @@ export class RecipeService {
   // private recipes: Recipe[] = [
   //   new Recipe(
   //     'Tiramisu',
-  //     'is very tasty',
-  //     'https://www.maxpixel.net/static/photo/1x/Menu-Tasty-Cake-Sweet-Food-Tiramisu-Dessert-3338312.jpg',
+  //     'Is very tasty',
+  //     'https://img.taste.com.au/gYVkZU8s/w720-h480-cfill-q80/taste/2018/07/july-18_no-cook-tiramisu-cake-138984-1.jpg',
   //     [
   //       new Ingredient('Cheese', 8),
   //       new Ingredient('Cookie', 2),
@@ -31,6 +31,15 @@ export class RecipeService {
   //     [
   //       new Ingredient('Color', 3),
   //       new Ingredient('Flour', 1)
+  //     ]
+  //   ),
+  //   new Recipe(
+  //     'Mikado',
+  //     'Chocolate cake',
+  //     'http://recipes777.info/wp-content/uploads/2016/12/xCyMZSgKL9Q.jpg"',
+  //     [
+  //       new Ingredient('Milk', 2),
+  //       new Ingredient('Chocolate', 1)
   //     ]
   //   )
   // ];

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Params, Router, ActivatedRoute } from '@angular/router';
-import { FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
+import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { RecipeService } from '../recipe.service';
 import { Recipe } from '../recipe.model';
 
@@ -13,6 +13,10 @@ export class RecipeEditComponent implements OnInit {
   id: number;
   editMode = false;
   recipeForm: FormGroup;
+
+  get ingredientControls() {
+    return (this.recipeForm.get('ingredients') as FormArray).controls;
+  }
 
   constructor(private activatedRoute: ActivatedRoute, private recipeService: RecipeService, private router: Router) {
   }

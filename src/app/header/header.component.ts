@@ -11,7 +11,7 @@ import { AuthService } from '../auth/auth.service';
 })
 export class HeaderComponent implements OnInit, OnDestroy {
   private userSubscription: Subscription;
-  private isAuthenticated = false;
+  public isAuthenticated = false;
 
   constructor(private dataStorageService: DataStorageService, private authService: AuthService) {
   }
@@ -21,7 +21,13 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   onFetchData() {
-    this.dataStorageService.fetchRecipes().subscribe();
+    this.dataStorageService.fetchRecipes()
+      .subscribe(
+        () => {
+        },
+        error => {
+          console.log('There is no recipe ' + error);
+        });
   }
 
   onLogOut() {
@@ -31,7 +37,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.userSubscription = this.authService.user
       .subscribe(user => {
-          this.isAuthenticated = !!user;
+        this.isAuthenticated = !!user;
       });
   }
 
