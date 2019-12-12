@@ -5,10 +5,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { AppRoutingModule } from './app-routing.module';
-import { ShoppingListModule } from './shopping-list/shopping-list.module';
 import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core.module';
-import { AuthModule } from './auth/auth.module';
 
 @NgModule({
   declarations: [
@@ -19,8 +17,6 @@ import { AuthModule } from './auth/auth.module';
     BrowserModule,
     HttpClientModule,
     AppRoutingModule, // by this you're adding RecipesModule both in a regular way and lazily, so removing it
-    ShoppingListModule,
-    AuthModule,
     SharedModule,
     CoreModule,
   ],

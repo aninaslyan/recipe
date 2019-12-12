@@ -5,13 +5,13 @@ import { ShoppingListComponent } from './shopping-list.component';
 
 const routes: Routes = [
   {
-    path: 'shopping-list',
+    path: '',
     component: ShoppingListComponent
   }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
 export class ShoppingListRoutingModule { }
