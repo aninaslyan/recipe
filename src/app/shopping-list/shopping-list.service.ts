@@ -14,10 +14,6 @@ export class ShoppingListService {
     new Ingredient('Sugar', 1.5)
   ];
 
-  getIngredients() {
-    return this.ingredients.slice(); // remove slice if you want to edit our old ingredient instead of new ingredient (preferred way)
-  }
-
   addIngredient(ingredient: Ingredient) {
     for(const ing of this.ingredients) {
       if(ing.name.toLowerCase() === ingredient.name.toLowerCase()) {
