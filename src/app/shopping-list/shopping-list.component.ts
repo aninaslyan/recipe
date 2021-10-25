@@ -30,11 +30,6 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
     // returns an Observable
     // no need to manage ngrx subscription (removed this.subscription) - BUT it's advised to unsubscribe manually
     this.ingredients = this.store.select('shoppingList');
-    // this.ingredients = this.ingredientService.getIngredients();
-    // this.subscription = this.ingredientService.ingredientChanged
-    //   .subscribe((ingredients: Ingredient[]) => {
-    //     this.ingredients = ingredients;
-    //   });
 
     this.loggingService.printLog('Hello from ShoppingList component ngOnInit');
   }

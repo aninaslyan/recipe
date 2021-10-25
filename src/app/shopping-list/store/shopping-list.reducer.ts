@@ -14,6 +14,17 @@ export function shoppingListReducer(
 ) {
   switch (action.type) {
     case ShoppingListActions.ADD_INGREDIENT:
+      const stateIngredients = JSON.parse(JSON.stringify(state.ingredients));
+
+      for(const ing of stateIngredients) {
+        if(ing.name.toLowerCase() === action.payload.name.toLowerCase()) {
+          ing.amount = ing.amount + action.payload.amount;
+          return {
+            ...state,
+            ingredients: [...stateIngredients]
+          };
+        }
+      }
       return {
         ...state,
         ingredients: [...state.ingredients, action.payload]

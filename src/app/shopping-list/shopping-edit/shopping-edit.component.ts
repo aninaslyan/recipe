@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Subscription } from 'rxjs';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 
 import { ShoppingListService } from '../shopping-list.service';
@@ -14,10 +15,10 @@ import * as ShoppingListActions from '../store/shopping-list.actions';
 })
 export class ShoppingEditComponent implements OnInit, OnDestroy {
   @ViewChild('f', { static: false }) form: NgForm;
-  subscription: Subscription;
   editMode = false;
   editedItemIndex: number;
   editedItem: Ingredient;
+  private ngUnsubscribe = new Subject<boolean>();
 
   constructor(
     private shoppingListService: ShoppingListService,
@@ -49,19 +50,24 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.subscription = this.shoppingListService.startedEditing
+    this.shoppingListService.startedEditing
+      .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((index: number) => {
         this.editedItemIndex = index;
         this.editMode = true;
-        this.editedItem = this.shoppingListService.getIngredient(index);
-        this.form.setValue({
-          name: this.editedItem.name,
-          amount: this.editedItem.amount
-        });
+        this.store.select('shoppingList')
+          .pipe(takeUntil(this.ngUnsubscribe))
+          .subscribe(shoppingList => {
+            this.editedItem = shoppingList.ingredients[index];
+            this.form.setValue({
+              name: this.editedItem.name,
+              amount: this.editedItem.amount
+            });
+          });
       });
   }
 
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    this.ngUnsubscribe.next();
   }
 }
