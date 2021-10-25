@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
+import { StoreModule } from '@ngrx/store';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -8,6 +9,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core.module';
 import { LoggingService } from './logging.service';
+import { shoppingListReducer } from './shopping-list/store/shopping-list.reducer';
 
 @NgModule({
   declarations: [
@@ -17,7 +19,8 @@ import { LoggingService } from './logging.service';
   imports: [
     BrowserModule,
     HttpClientModule,
-    AppRoutingModule, // by this you're adding RecipesModule both in a regular way and lazily, so removing it
+    AppRoutingModule,
+    StoreModule.forRoot({ shoppingList: shoppingListReducer }), // any actions that will dispatch, will reach to this reducer
     SharedModule,
     CoreModule,
   ],
