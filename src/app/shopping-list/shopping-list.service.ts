@@ -22,7 +22,8 @@ export class ShoppingListService {
     for(const ing of this.ingredients) {
       if(ing.name.toLowerCase() === ingredient.name.toLowerCase()) {
         ing.amount = ing.amount + ingredient.amount;
-        return this.ingredientChanged.next(this.ingredients.slice());
+        this.ingredientChanged.next(this.ingredients.slice());
+        return;
       }
     }
     this.ingredients.push(ingredient);
@@ -40,8 +41,9 @@ export class ShoppingListService {
   }
 
   addIngredients(ingredients: Ingredient[]) {
-    this.ingredients.push(...ingredients);
-    this.ingredientChanged.next(this.ingredients.slice());
+    ingredients.forEach(ingredient => {
+      this.addIngredient(ingredient);
+    });
   }
 
   getIngredient(index: number) {
