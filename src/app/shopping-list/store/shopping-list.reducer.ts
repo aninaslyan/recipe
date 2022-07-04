@@ -1,12 +1,5 @@
-import { Ingredient } from '../../shared/ingredients.model';
 import * as ShoppingListActions from './shopping-list.actions';
-
-const initialState = {
-  ingredients: [
-    new Ingredient('Flour', 2),
-    new Ingredient('Sugar', 1.5)
-  ]
-};
+import { initialState } from './shopping-list.state';
 
 export function shoppingListReducer(
   state = initialState,
