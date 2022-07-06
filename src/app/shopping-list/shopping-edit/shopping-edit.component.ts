@@ -6,7 +6,7 @@ import { Store } from '@ngrx/store';
 
 import { ShoppingListService } from '../shopping-list.service';
 import { Ingredient } from '../../shared/ingredients.model';
-import * as ShoppingListActions from '../store/shopping-list.actions';
+import { addIngredient } from '../store/shopping-list.actions';
 
 @Component({
   selector: 'app-shopping-edit',
@@ -32,7 +32,7 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
     if (this.editMode) {
       this.shoppingListService.updateIngredient(this.editedItemIndex, newIngredient);
     } else {
-      this.store.dispatch(new ShoppingListActions.AddIngredient(newIngredient));
+      this.store.dispatch(addIngredient(newIngredient));
     }
     this.onClearForm();
   }

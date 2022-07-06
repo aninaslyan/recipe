@@ -1,12 +1,5 @@
-import { Action } from '@ngrx/store';
-
 import { Ingredient } from '../../shared/ingredients.model';
+import { createHTTPActions } from '../../shared/state/state.helpers';
 
-export const ADD_INGREDIENT = 'ADD_INGREDIENT';
-
-export class AddIngredient implements Action {
-  readonly type = ADD_INGREDIENT;
-
-  constructor(public payload: Ingredient) {
-  }
-}
+// for not doing typo
+export const [addIngredient, addIngredientSuccess, addIngredientError] = createHTTPActions<Ingredient, {name: string, amount: number}>('[ShoppingList] Add Ingredient');

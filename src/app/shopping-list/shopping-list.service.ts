@@ -3,7 +3,7 @@ import { Subject } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 
-import * as ShoppingListActions from './store/shopping-list.actions';
+import { addIngredient } from './store/shopping-list.actions';
 
 @Injectable()
 export class ShoppingListService {
@@ -33,7 +33,7 @@ export class ShoppingListService {
 
   addIngredients(ingredients: Ingredient[]) {
     ingredients.forEach(ingredient => {
-      this.store.dispatch(new ShoppingListActions.AddIngredient(ingredient));
+      this.store.dispatch(addIngredient(ingredient));
     });
   }
 }
