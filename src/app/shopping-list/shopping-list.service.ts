@@ -1,9 +1,8 @@
-import { Ingredient } from '../shared/ingredients.model';
 import { Subject } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 
-import { addIngredient } from './store/shopping-list.actions';
+import { Ingredient } from '../shared/ingredients.model';
 
 @Injectable()
 export class ShoppingListService {
@@ -29,11 +28,5 @@ export class ShoppingListService {
   updateIngredient(index: number, ingredient: Ingredient) {
     this.ingredients[index] = ingredient;
     this.ingredientChanged.next(this.ingredients.slice());
-  }
-
-  addIngredients(ingredients: Ingredient[]) {
-    ingredients.forEach(ingredient => {
-      this.store.dispatch(addIngredient(ingredient));
-    });
   }
 }
