@@ -1,5 +1,6 @@
-import { Ingredient } from '../../shared/ingredients.model';
-import { createHTTPActions } from '../../shared/state/state.helpers';
+import { createAction } from '@ngrx/store';
 
-// for not doing typo
-export const [addIngredient, addIngredientSuccess, addIngredientError] = createHTTPActions<Ingredient, {name: string, amount: number}>('[ShoppingList] Add Ingredient');
+import { Ingredient } from '../../shared/ingredients.model';
+
+// for not doing typo in string
+export const addIngredient = createAction('[ShoppingList] Add Ingredient', (data: Ingredient) => ({ payload: data }));

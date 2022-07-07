@@ -1,23 +1,25 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import { ShoppingListService } from './shopping-list.service';
-import { Ingredient } from '../shared/ingredients.model';
 import { LoggingService } from '../logging.service';
+import { ingredients } from './store/shopping-list.selectors';
 
 @Component({
   selector: 'app-shopping-list',
   templateUrl: './shopping-list.component.html',
   styleUrls: ['./shopping-list.component.css'],
 })
-export class ShoppingListComponent implements OnInit, OnDestroy {
-  ingredients: Observable<{ ingredients: Ingredient[] }>;
+export class ShoppingListComponent implements OnInit {
+  // to select a part of your state (select state inside shoppingList key)
+  // returns an Observable
+  // no need to manage ngrx subscription (removed this.subscription) - BUT it's advised to unsubscribe manually
+  ingredients$ = this.store.select(ingredients);
 
   constructor(
     private ingredientService: ShoppingListService,
     private loggingService: LoggingService,
-    private store: Store<{ shoppingList: { ingredients: Ingredient[] }}>,
+    private store: Store, // <{ shoppingList: { ingredients: Ingredient[] }}>
   ) {
   }
 
@@ -26,15 +28,6 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    // to select a part of your state (select state inside shoppingList key)
-    // returns an Observable
-    // no need to manage ngrx subscription (removed this.subscription) - BUT it's advised to unsubscribe manually
-    this.ingredients = this.store.select('shoppingList');
-
     this.loggingService.printLog('Hello from ShoppingList component ngOnInit');
-  }
-
-  ngOnDestroy(): void {
-    // this.subscription.unsubscribe();
   }
 }

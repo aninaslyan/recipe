@@ -5,17 +5,18 @@ import { initialState } from './shopping-list.state';
 
 const _shoppingListReducer = createReducer(
   initialState,
-  on(ShoppingListActions.addIngredientSuccess, (state, { payload }) => {
-      for(const ing of state.ingredients) {
-        if(ing.name.toLowerCase() === payload.name.toLowerCase()) {
-          ing.amount = ing.amount + payload.amount;
-          return {
-            ...state,
-            ingredients: [...state.ingredients]
-          };
-        }
+  on(ShoppingListActions.addIngredient, (state, {payload}) => {
+    const modifiedState = JSON.parse(JSON.stringify(state));
+    for (const ing of modifiedState.ingredients) {
+      if (ing.name.toLowerCase() === payload.name.toLowerCase()) {
+        ing.amount = ing.amount + payload.amount;
+        return {
+          ...state,
+          ingredients: [...modifiedState.ingredients]
+        };
       }
-    return {...state, ingredients: [...state.ingredients, payload]}
+    }
+    return {...state, ingredients: [...state.ingredients, payload]};
   })
 );
 

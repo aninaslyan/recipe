@@ -1,6 +1,6 @@
 import { Ingredient } from '../../shared/ingredients.model';
 
-interface ShoppingListState {
+export interface ShoppingListState {
   ingredients: Ingredient[];
 }
 
