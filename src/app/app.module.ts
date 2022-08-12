@@ -12,6 +12,7 @@ import { CoreModule } from './core.module';
 import { LoggingService } from './logging.service';
 import { shoppingListReducer } from './shopping-list/store/shopping-list.reducer';
 import { ShoppingListEffects } from './shopping-list/store/shopping-list.effects';
+import { FeatureSelectors } from './shared/state/feature-selectors.enum';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,7 @@ import { ShoppingListEffects } from './shopping-list/store/shopping-list.effects
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
-    StoreModule.forRoot({ shoppingList: shoppingListReducer }, {
+    StoreModule.forRoot({ [FeatureSelectors.ShoppingList]: shoppingListReducer }, {
       runtimeChecks: {
         strictActionTypeUniqueness: true, // Verifies that action types are not registered more than once
       },
