@@ -6,7 +6,8 @@ import { Store } from '@ngrx/store';
 
 import { ShoppingListService } from '../shopping-list.service';
 import { Ingredient } from '../../shared/ingredients.model';
-import { addIngredient } from '../store/shopping-list.actions';
+import { addIngredient, deleteIngredient, updateIngredient } from '../store/shopping-list.actions';
+import { selectIngredients } from '../store/shopping-list.selectors';
 
 @Component({
   selector: 'app-shopping-edit',
@@ -30,7 +31,7 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
     const value = this.form.value;
     const newIngredient = new Ingredient(value.name, value.amount);
     if (this.editMode) {
-      this.shoppingListService.updateIngredient(this.editedItemIndex, newIngredient);
+      this.store.dispatch(updateIngredient(this.editedItemIndex, newIngredient));
     } else {
       this.store.dispatch(addIngredient(newIngredient));
     }
@@ -39,7 +40,7 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
 
   onDeleteItem() {
     if(this.editMode) {
-      this.shoppingListService.deleteIngredient(this.editedItemIndex);
+      this.store.dispatch(deleteIngredient(this.editedItemIndex));
       this.onClearForm();
     }
   }
@@ -55,10 +56,10 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
       .subscribe((index: number) => {
         this.editedItemIndex = index;
         this.editMode = true;
-        this.store.select('shoppingList')
+        this.store.select(selectIngredients)
           .pipe(takeUntil(this.ngUnsubscribe))
-          .subscribe(shoppingList => {
-            this.editedItem = shoppingList.ingredients[index];
+          .subscribe(ingredients => {
+            this.editedItem = ingredients[index];
             this.form.setValue({
               name: this.editedItem.name,
               amount: this.editedItem.amount

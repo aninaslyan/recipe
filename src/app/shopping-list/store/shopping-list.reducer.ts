@@ -17,6 +17,22 @@ const _shoppingListReducer = createReducer(
       }
     }
     return {...state, ingredients: [...state.ingredients, payload]};
+  }),
+  on(ShoppingListActions.deleteIngredient, (state, {payload}) => {
+    const modifiedState = JSON.parse(JSON.stringify(state));
+    modifiedState.ingredients.splice(payload, 1);
+    return {
+      ...state,
+      ingredients: modifiedState.ingredients
+    }
+  }),
+  on(ShoppingListActions.updateIngredient, (state, {payload}) => {
+    const modifiedState = JSON.parse(JSON.stringify(state));
+    modifiedState.ingredients[payload.index] = payload.newIngredient;
+    return {
+      ...state,
+      ingredients: modifiedState.ingredients
+    }
   })
 );
 
