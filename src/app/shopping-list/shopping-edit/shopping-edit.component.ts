@@ -60,10 +60,12 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
           .pipe(takeUntil(this.ngUnsubscribe))
           .subscribe(ingredients => {
             this.editedItem = ingredients[index];
-            this.form.setValue({
-              name: this.editedItem.name,
-              amount: this.editedItem.amount
-            });
+            if (this.editedItem) {
+              this.form.setValue({
+                name: this.editedItem.name,
+                amount: this.editedItem.amount
+              });
+            }
           });
       });
   }
