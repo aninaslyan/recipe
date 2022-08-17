@@ -19,18 +19,24 @@ const _shoppingListReducer = createReducer(
     }
     return {...state, ingredients: [...ingredients, payload]};
   }),
-  on(ShoppingListActions.deleteIngredient, (state, {payload}) => {
+  on(ShoppingListActions.deleteIngredient, (state) => {
     return {
       ...state,
-      ingredients: state.ingredients.filter((ingredient, index) => index !== payload)
+      ingredients: state.ingredients.filter((ingredient, index) => index !== state.editingIngredientIndex)
     }
   }),
   on(ShoppingListActions.updateIngredient, (state, {payload}) => {
     const ingredients = [...state.ingredients];
-    ingredients[payload.index] = payload.newIngredient;
+    ingredients[state.editingIngredientIndex] = payload;
     return {
       ...state,
       ingredients
+    }
+  }),
+  on(ShoppingListActions.editingIngredientIndex, (state, {payload}) => {
+    return {
+      ...state,
+      editingIngredientIndex: payload
     }
   })
 );
