@@ -10,7 +10,7 @@ export class ShoppingListEffects {
   addIngredients$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(shoppingListActions.addIngredients),
-      mergeMap(({payload}) => payload.map(ingredient => shoppingListActions.addIngredient(ingredient)))
+      mergeMap(({ payload }) => payload.map(ingredient => shoppingListActions.addIngredient(ingredient)))
     );
   });
 

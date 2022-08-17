@@ -18,7 +18,6 @@ import { AppState } from '../../shared/state/state.interface';
 export class ShoppingEditComponent implements OnInit, OnDestroy {
   @ViewChild('f', { static: false }) form: NgForm;
   editMode = false;
-  editedItem: Ingredient;
   private ngUnsubscribe = new Subject<boolean>();
 
   constructor(
@@ -28,8 +27,8 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    const value = this.form.value;
-    const newIngredient = new Ingredient(value.name, value.amount);
+    const { name, amount } = this.form.value;
+    const newIngredient = new Ingredient(name, amount);
     if (this.editMode) {
       this.store.dispatch(updateIngredient(newIngredient));
     } else {
@@ -51,16 +50,19 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.actions$.pipe(ofType(editingIngredientIndex), takeUntil(this.ngUnsubscribe)).subscribe(({payload}) => {
+    this.actions$.pipe(
+      ofType(editingIngredientIndex),
+      takeUntil(this.ngUnsubscribe)
+    ).subscribe(({ payload }) => {
       this.editMode = true;
       this.store.select(selectIngredients)
         .pipe(takeUntil(this.ngUnsubscribe))
         .subscribe(ingredients => {
-          this.editedItem = ingredients[payload];
-          if (this.editedItem) {
+          const editedItem = ingredients[payload];
+          if (editedItem) {
             this.form.setValue({
-              name: this.editedItem.name,
-              amount: this.editedItem.amount
+              name: editedItem.name,
+              amount: editedItem.amount
             });
           }
         });
