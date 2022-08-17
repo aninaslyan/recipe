@@ -8,7 +8,7 @@ import { Actions, ofType } from '@ngrx/effects';
 import { Ingredient } from '../../shared/ingredients.model';
 import { addIngredient, deleteIngredient, editingIngredientIndex, updateIngredient } from '../store/shopping-list.actions';
 import { selectIngredients } from '../store/shopping-list.selectors';
-import { ShoppingListState } from '../store/shopping-list.state';
+import { AppState } from '../../shared/state/state.interface';
 
 @Component({
   selector: 'app-shopping-edit',
@@ -22,7 +22,7 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
   private ngUnsubscribe = new Subject<boolean>();
 
   constructor(
-    private store: Store<{ shoppingList: ShoppingListState }>,
+    private store: Store<AppState>,
     private actions$: Actions
   ) {
   }

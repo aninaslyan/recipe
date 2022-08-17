@@ -4,6 +4,7 @@ import { Store } from '@ngrx/store';
 import { LoggingService } from '../logging.service';
 import { selectIngredients } from './store/shopping-list.selectors';
 import { editingIngredientIndex } from './store/shopping-list.actions';
+import { AppState } from '../shared/state/state.interface';
 
 @Component({
   selector: 'app-shopping-list',
@@ -18,7 +19,7 @@ export class ShoppingListComponent implements OnInit {
 
   constructor(
     private loggingService: LoggingService,
-    private store: Store, // <{ shoppingList: { ingredients: Ingredient[] }}>
+    private store: Store<AppState>,
   ) {
   }
 
