@@ -23,7 +23,7 @@ import { FeatureSelectors } from './shared/state/feature-selectors.enum';
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
-    StoreModule.forRoot({ [FeatureSelectors.ShoppingList]: shoppingListReducer }, {
+    StoreModule.forRoot({}, {
       runtimeChecks: {
         strictActionTypeUniqueness: true, // Verifies that action types are not registered more than once
       },

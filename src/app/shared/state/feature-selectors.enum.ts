@@ -1,3 +1,4 @@
 export enum FeatureSelectors {
-  ShoppingList = 'ShoppingList'
+  ShoppingList = 'ShoppingList',
+  Auth = 'Auth'
 }
