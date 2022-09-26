@@ -1,9 +1,13 @@
 import { User } from '../user.model';
 
 export interface AuthState {
-  user: User
+  user: User;
+  loading: boolean;
+  alertMessage: string;
 }
 
 export const initialState: AuthState = {
-  user: null
+  user: null,
+  loading: false,
+  alertMessage: null
 }

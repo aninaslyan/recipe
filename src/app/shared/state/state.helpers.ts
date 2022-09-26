@@ -1,10 +1,11 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { ActionCreator, createAction } from '@ngrx/store';
 import { TypedAction } from '@ngrx/store/src/models';
 
 export function createHTTPActions<
   RequestPayload = void,
   ResponsePayload = void,
-  ErrorPayload = Error,
+  ErrorPayload = HttpErrorResponse,
 >(
   actionType: string,
 ): [

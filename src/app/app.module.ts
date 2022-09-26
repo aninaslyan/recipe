@@ -10,9 +10,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core.module';
 import { LoggingService } from './logging.service';
-import { shoppingListReducer } from './shopping-list/store/shopping-list.reducer';
 import { ShoppingListEffects } from './shopping-list/store/shopping-list.effects';
-import { FeatureSelectors } from './shared/state/feature-selectors.enum';
 
 @NgModule({
   declarations: [

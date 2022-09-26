@@ -24,11 +24,11 @@ export class AuthService {
   constructor(private http: HttpClient, private router: Router) {
   }
 
-  private static handleError(errorRes: HttpErrorResponse) {
+  static handleError(errorRes: HttpErrorResponse): string {
     let errorMessage = 'An unknown error occurred';
 
     if (!errorRes.error || !errorRes.error.error) {
-      return throwError(errorMessage);
+      return errorMessage;
     }
 
     switch (errorRes.error.error.message) {
@@ -49,10 +49,10 @@ export class AuthService {
         break;
     }
 
-    return throwError(errorMessage);
+    return errorMessage;
   }
 
-  private handleAuthentication(email: string, id: string, token: string, expiresIn: number) {
+  handleAuthentication(email: string, id: string, token: string, expiresIn: number) {
     const expirationDate = new Date(new Date().getTime() + expiresIn * 1000);
     const user = new User(
       email,
@@ -91,12 +91,7 @@ export class AuthService {
       email,
       password,
       returnSecureToken: true
-    })
-      .pipe(catchError(AuthService.handleError),
-        tap(resData => {
-          this.handleAuthentication(resData.email, resData.localId, resData.idToken, +resData.expiresIn);
-        })
-      );
+    });
   }
 
   logIn(email: string, password: string) {
@@ -104,12 +99,7 @@ export class AuthService {
       email,
       password,
       returnSecureToken: true
-    })
-      .pipe(catchError(AuthService.handleError),
-        tap(resData => {
-          this.handleAuthentication(resData.email, resData.localId, resData.idToken, +resData.expiresIn);
-        })
-      );
+    });
   }
 
   logOut() {
