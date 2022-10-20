@@ -8,3 +8,5 @@ export const [loginUser, loginUserSuccess, loginUserError] = createHTTPActions<{
 export const [signUpUser, signUpUserSuccess, signUpUserError] = createHTTPActions<{ email: string, password: string }, IAuthResponseData>('[Auth] Sign up User');
 
 export const closeAuthAlert = createAction('[Auth] Close Auth Alert');
+
+export const userData = createAction('[Auth] User data', userData => ({ payload: userData }))

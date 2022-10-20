@@ -8,3 +8,5 @@ const selector = <T>(mapping: (state: AuthState) => T) => createSelector(authFea
 
 export const authLoading = selector((state: AuthState) => state.loading);
 export const alertMessage = selector((state: AuthState) => state.alertMessage);
+export const userData = selector((state: AuthState) => state.user);
+export const isAuthenticated = createSelector(userData, userData => !!userData);

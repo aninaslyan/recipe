@@ -22,8 +22,6 @@ import { AuthEffects } from './store/auth.effects';
     FormsModule,
     AuthRoutingModule,
     SharedModule,
-    StoreModule.forFeature(FeatureSelectors.Auth, authReducer),
-    EffectsModule.forFeature([AuthEffects])
   ]
 })
 export class AuthModule {

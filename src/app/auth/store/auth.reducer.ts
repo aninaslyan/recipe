@@ -27,6 +27,10 @@ const _authReducer = createReducer(
       alertMessage: null
     }),
   ),
+  on(AuthActions.userData, (state, { payload }) => ({
+    ...state,
+    user: payload
+  }))
 );
 
 export function authReducer(state, action: Action) {

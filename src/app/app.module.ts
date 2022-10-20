@@ -10,7 +10,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core.module';
 import { LoggingService } from './logging.service';
-import { ShoppingListEffects } from './shopping-list/store/shopping-list.effects';
+import { FeatureSelectors } from './shared/state/feature-selectors.enum';
+import { authReducer } from './auth/store/auth.reducer';
+import { AuthEffects } from './auth/store/auth.effects';
 
 @NgModule({
   declarations: [
@@ -21,12 +23,14 @@ import { ShoppingListEffects } from './shopping-list/store/shopping-list.effects
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
-    StoreModule.forRoot({}, {
+    StoreModule.forRoot({
+      [FeatureSelectors.Auth]: authReducer
+    }, {
       runtimeChecks: {
         strictActionTypeUniqueness: true, // Verifies that action types are not registered more than once
       },
     }), // any actions that will dispatch, will reach to this reducer
-    EffectsModule.forRoot([ShoppingListEffects]),
+    EffectsModule.forRoot([AuthEffects]),
     SharedModule,
     CoreModule,
   ],
