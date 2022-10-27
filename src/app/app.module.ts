@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -13,6 +14,7 @@ import { LoggingService } from './logging.service';
 import { FeatureSelectors } from './shared/state/feature-selectors.enum';
 import { authReducer } from './auth/store/auth.reducer';
 import { AuthEffects } from './auth/store/auth.effects';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -30,6 +32,7 @@ import { AuthEffects } from './auth/store/auth.effects';
         strictActionTypeUniqueness: true, // Verifies that action types are not registered more than once
       },
     }), // any actions that will dispatch, will reach to this reducer
+    StoreDevtoolsModule.instrument({ logOnly: environment.production }),
     EffectsModule.forRoot([AuthEffects]),
     SharedModule,
     CoreModule,
@@ -37,4 +40,5 @@ import { AuthEffects } from './auth/store/auth.effects';
   providers: [LoggingService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
