@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Params, Router, ActivatedRoute } from '@angular/router';
 import { UntypedFormArray, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
+import { Store } from '@ngrx/store';
+
 import { RecipeService } from '../recipe.service';
 import { Recipe } from '../recipe.model';
+import { selectRecipe } from '../store/recipe.selector';
+import { AppState } from '../../shared/state-helper/state.interface';
 
 @Component({
   selector: 'app-recipe-edit',
@@ -10,6 +14,8 @@ import { Recipe } from '../recipe.model';
   styleUrls: ['./recipe-edit.component.css']
 })
 export class RecipeEditComponent implements OnInit {
+  recipe$ = this.store.select(selectRecipe);
+
   id: number;
   editMode = false;
   recipeForm: UntypedFormGroup;
@@ -18,7 +24,7 @@ export class RecipeEditComponent implements OnInit {
     return (this.recipeForm.get('ingredients') as UntypedFormArray).controls;
   }
 
-  constructor(private activatedRoute: ActivatedRoute, private recipeService: RecipeService, private router: Router) {
+  constructor(private activatedRoute: ActivatedRoute, private recipeService: RecipeService, private router: Router, private store: Store<AppState>) {
   }
 
   ngOnInit() {
@@ -37,22 +43,23 @@ export class RecipeEditComponent implements OnInit {
     const recipeIngredients = new UntypedFormArray([]);
 
     if (this.editMode) {
-      const recipe = this.recipeService.getRecipe(this.id);
-      recipeName = recipe.name;
-      recipeImagePath = recipe.imagePath;
-      recipeDescription = recipe.description;
+      this.recipe$.subscribe(recipe => {
+        recipeName = recipe.name;
+        recipeImagePath = recipe.imagePath;
+        recipeDescription = recipe.description;
 
-      for (const ingredient of recipe.ingredients) {// check the existence of recipe.ingredients
-        recipeIngredients.push(
-          new UntypedFormGroup({
-            name: new UntypedFormControl(ingredient.name, Validators.required),
-            amount: new UntypedFormControl(ingredient.amount, [
-              Validators.required,
-              Validators.pattern(/(^[1-9]+[0-9]*$)|(^[1-9].[0-9]*$)/)
-            ])
-          })
-        );
-      }
+        for (const ingredient of recipe.ingredients) {// check the existence of recipe.ingredients
+          recipeIngredients.push(
+            new UntypedFormGroup({
+              name: new UntypedFormControl(ingredient.name, Validators.required),
+              amount: new UntypedFormControl(ingredient.amount, [
+                Validators.required,
+                Validators.pattern(/(^[1-9]+[0-9]*$)|(^[1-9].[0-9]*$)/)
+              ])
+            })
+          );
+        }
+      });
     }
 
     this.recipeForm = new UntypedFormGroup({

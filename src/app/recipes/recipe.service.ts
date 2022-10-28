@@ -46,9 +46,9 @@ export class RecipeService {
     return this.recipes.slice(); // copying
   }
 
-  getRecipe(id: number) {
-    return this.recipes[id];
-  }
+  // getRecipe(id: number) {
+  //   return this.recipes[id];
+  // }
 
   addRecipe(recipe: Recipe) {
     this.recipes.push(recipe);
@@ -65,8 +65,8 @@ export class RecipeService {
     this.recipeChanges.next(this.recipes.slice());
   }
 
-  setRecipes(recipes: Recipe[]) {
-    this.recipes = recipes;
-    this.recipeChanges.next(this.recipes.slice());
-  }
+//   setRecipes(recipes: Recipe[]) {
+//     this.recipes = recipes;
+//     this.recipeChanges.next(this.recipes.slice());
+//   }
 }

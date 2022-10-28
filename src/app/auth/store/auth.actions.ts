@@ -1,4 +1,4 @@
-import { createHTTPActions } from '../../shared/state/state.helpers';
+import { createHTTPActions } from '../../shared/state-helper/state.helpers';
 import { createAction } from '@ngrx/store';
 
 import { IAuthResponseData } from '../auth.service';

@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { LoggingService } from '../logging.service';
 import { selectIngredients } from './store/shopping-list.selectors';
 import { editingIngredientIndex } from './store/shopping-list.actions';
-import { AppState } from '../shared/state/state.interface';
+import { AppState } from '../shared/state-helper/state.interface';
 
 @Component({
   selector: 'app-shopping-list',

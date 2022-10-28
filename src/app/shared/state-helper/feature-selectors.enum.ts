@@ -1,4 +1,5 @@
 export enum FeatureSelectors {
   ShoppingList = 'ShoppingList',
-  Auth = 'Auth'
+  Auth = 'Auth',
+  Recipe = 'Recipe',
 }

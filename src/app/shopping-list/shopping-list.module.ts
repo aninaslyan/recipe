@@ -9,7 +9,7 @@ import { ShoppingEditComponent } from './shopping-edit/shopping-edit.component';
 import { ShoppingListRoutingModule } from './shopping-list-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { LoggingService } from '../logging.service';
-import { FeatureSelectors } from '../shared/state/feature-selectors.enum';
+import { FeatureSelectors } from '../shared/state-helper/feature-selectors.enum';
 import { shoppingListReducer } from './store/shopping-list.reducer';
 import { ShoppingListEffects } from './store/shopping-list.effects';
 

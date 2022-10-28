@@ -1,7 +1,7 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 
 import { ShoppingListState } from './shopping-list.state';
-import { FeatureSelectors } from '../../shared/state/feature-selectors.enum';
+import { FeatureSelectors } from '../../shared/state-helper/feature-selectors.enum';
 
 const shoppingListFeature = createFeatureSelector<ShoppingListState>(FeatureSelectors.ShoppingList);
 const selector = <T>(mapping: (state: ShoppingListState) => T) => createSelector(shoppingListFeature, mapping);

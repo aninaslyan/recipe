@@ -3,7 +3,8 @@ import { Store } from '@ngrx/store';
 
 import { DataStorageService } from '../shared/data-storage.service';
 import { AuthService } from '../auth/auth.service';
-import { isAuthenticated, userData } from '../auth/store/auth.selectors';
+import { isAuthenticated } from '../auth/store/auth.selectors';
+import * as RecipeActions from '../recipes/store/recipe.actions';
 
 @Component({
   selector: 'app-header',
@@ -17,17 +18,11 @@ export class HeaderComponent {
   }
 
   onSaveData() {
-    this.dataStorageService.storeRecipes();
+    // this.dataStorageService.storeRecipes();
   }
 
   onFetchData() {
-    this.dataStorageService.fetchRecipes()
-      .subscribe(
-        () => {
-        },
-        error => {
-          console.log('There is no recipe ' + error);
-        });
+    this.store.dispatch(RecipeActions.fetchRecipes());
   }
 
   onLogOut() {

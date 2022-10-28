@@ -1,4 +1,4 @@
-<div style="margin: 10px 0 0 25px">
+<div style="margin: 10px 0 0 25px" *ngIf="recipe$ | async as recipe">
   <div class="row">
     <div class="col-xs-12">
       <img
@@ -34,7 +34,7 @@
           <a
             class="dropdown-item"
             style="cursor:pointer;"
-            (click)="onAddToShoppingList()"
+            (click)="onAddToShoppingList(recipe.ingredients)"
           >To Shopping List</a>
           <a
             style="cursor:pointer;"

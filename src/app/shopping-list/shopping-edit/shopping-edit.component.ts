@@ -8,7 +8,7 @@ import { Actions, ofType } from '@ngrx/effects';
 import { Ingredient } from '../../shared/ingredients.model';
 import { addIngredient, deleteIngredient, editingIngredientIndex, updateIngredient } from '../store/shopping-list.actions';
 import { selectIngredients } from '../store/shopping-list.selectors';
-import { AppState } from '../../shared/state/state.interface';
+import { AppState } from '../../shared/state-helper/state.interface';
 
 @Component({
   selector: 'app-shopping-edit',

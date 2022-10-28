@@ -4,7 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { StoreRouterConnectingModule } from '@ngrx/router-store';
+// import { StoreRouterConnectingModule } from '@ngrx/router-store';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -12,7 +12,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core.module';
 import { LoggingService } from './logging.service';
-import { FeatureSelectors } from './shared/state/feature-selectors.enum';
+import { FeatureSelectors } from './shared/state-helper/feature-selectors.enum';
 import { authReducer } from './auth/store/auth.reducer';
 import { AuthEffects } from './auth/store/auth.effects';
 import { environment } from '../environments/environment';
@@ -34,7 +34,7 @@ import { environment } from '../environments/environment';
       },
     }), // any actions that will dispatch, will reach to this reducer
     StoreDevtoolsModule.instrument({ logOnly: environment.production }),
-    StoreRouterConnectingModule.forRoot(),
+    // StoreRouterConnectingModule.forRoot(),
     EffectsModule.forRoot([AuthEffects]),
     SharedModule,
     CoreModule,
