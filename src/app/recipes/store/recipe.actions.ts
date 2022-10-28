@@ -13,3 +13,5 @@ export const updateRecipe = createAction('[Recipe] Update Receipt', (id: number,
 export const deleteRecipe = createAction('[Recipe] Delete Receipt', (id: number) => ({payload: {id}}));
 
 export const [fetchRecipes, fetchRecipesSuccess, fetchRecipesError] = createHTTPActions<void, Recipe[]>('[Recipe] Fetch Recipes');
+
+export const [storeRecipes, , storeRecipesError] = createHTTPActions<void, Recipe[]>('[Recipe] Store Recipes');

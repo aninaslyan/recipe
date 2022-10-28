@@ -6,9 +6,9 @@ import {
 } from '@angular/router';
 import { Store } from '@ngrx/store';
 
-import { DataStorageService } from '../shared/data-storage.service';
 import { AppState } from '../shared/state-helper/state.interface';
 import * as RecipesActions from './store/recipe.actions';
+import { RecipesService } from './recipes.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +16,7 @@ import * as RecipesActions from './store/recipe.actions';
 export class RecipesResolverService implements Resolve<void> {
 
   constructor(
-    private dataStorageService: DataStorageService,
+    private recipesService: RecipesService,
     private store: Store<AppState>,
   ) {
   }

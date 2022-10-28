@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 
-import { DataStorageService } from '../shared/data-storage.service';
+import { RecipesService } from '../recipes/recipes.service';
 import { AuthService } from '../auth/auth.service';
 import { isAuthenticated } from '../auth/store/auth.selectors';
 import * as RecipeActions from '../recipes/store/recipe.actions';
@@ -14,11 +14,11 @@ import * as RecipeActions from '../recipes/store/recipe.actions';
 export class HeaderComponent {
   isAuthenticated$ = this.store.select(isAuthenticated);
 
-  constructor(private dataStorageService: DataStorageService, private authService: AuthService, private store: Store) {
+  constructor(private recipesService: RecipesService, private authService: AuthService, private store: Store) {
   }
 
   onSaveData() {
-    // this.dataStorageService.storeRecipes();
+    this.store.dispatch(RecipeActions.storeRecipes());
   }
 
   onFetchData() {
