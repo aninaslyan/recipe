@@ -3,10 +3,10 @@ import { Params, Router, ActivatedRoute } from '@angular/router';
 import { UntypedFormArray, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 
-import { RecipeService } from '../recipe.service';
 import { Recipe } from '../recipe.model';
 import { selectRecipe } from '../store/recipe.selector';
 import { AppState } from '../../shared/state-helper/state.interface';
+import * as RecipeActions from '../store/recipe.actions';
 
 @Component({
   selector: 'app-recipe-edit',
@@ -24,7 +24,7 @@ export class RecipeEditComponent implements OnInit {
     return (this.recipeForm.get('ingredients') as UntypedFormArray).controls;
   }
 
-  constructor(private activatedRoute: ActivatedRoute, private recipeService: RecipeService, private router: Router, private store: Store<AppState>) {
+  constructor(private activatedRoute: ActivatedRoute, private router: Router, private store: Store<AppState>) {
   }
 
   ngOnInit() {
@@ -77,10 +77,10 @@ export class RecipeEditComponent implements OnInit {
       this.recipeForm.value.imagePath,
       this.recipeForm.value.ingredients,
     );
-    if(this.editMode) {// this.recipeForm.value
-      this.recipeService.updateRecipe(this.id, newRecipe);
+    if(this.editMode) {
+      this.store.dispatch(RecipeActions.updateRecipe(this.id, newRecipe));
     } else {
-      this.recipeService.addRecipe(newRecipe);
+      this.store.dispatch(RecipeActions.addRecipe(newRecipe));
     }
     this.onNavigateClick();
   }

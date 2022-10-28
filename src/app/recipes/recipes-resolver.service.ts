@@ -7,7 +7,6 @@ import {
 import { Store } from '@ngrx/store';
 
 import { DataStorageService } from '../shared/data-storage.service';
-import { RecipeService } from './recipe.service';
 import { AppState } from '../shared/state-helper/state.interface';
 import * as RecipesActions from './store/recipe.actions';
 
@@ -18,7 +17,6 @@ export class RecipesResolverService implements Resolve<void> {
 
   constructor(
     private dataStorageService: DataStorageService,
-    private recipesService: RecipeService,
     private store: Store<AppState>,
   ) {
   }

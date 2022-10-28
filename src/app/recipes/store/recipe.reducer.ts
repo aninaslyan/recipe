@@ -13,6 +13,23 @@ const _recipeReducer = createReducer(
     ...state,
     recipes: payload
   })),
+  on(RecipeActions.addRecipe, (state, { payload }) => ({
+    ...state,
+    recipes: [...state.recipes, payload]
+  })),
+  on(RecipeActions.updateRecipe, (state, { payload }) => {
+    const recipes = [...state.recipes];
+    recipes[payload.id] = payload.recipe;
+
+    return {
+      ...state,
+      recipes
+    };
+  }),
+  on(RecipeActions.deleteRecipe, (state, { payload }) => ({
+    ...state,
+    recipes: state.recipes.filter((recipe, index) => index !== payload.id)
+  })),
   on(RecipeActions.fetchRecipesSuccess, (state, { payload }) => ({
     ...state,
     recipes: payload.map(recipe => ({

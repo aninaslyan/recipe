@@ -3,7 +3,6 @@ import { Store } from '@ngrx/store';
 import { Actions, ofType } from '@ngrx/effects';
 import { take } from 'rxjs/operators';
 
-import { RecipeService } from '../recipe.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { addIngredients } from '../../shopping-list/store/shopping-list.actions';
 import { AppState } from '../../shared/state-helper/state.interface';
@@ -24,7 +23,6 @@ export class RecipeDetailComponent implements OnInit {
   id: number;
 
   constructor(
-    private recipeService: RecipeService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private store: Store<AppState>,
@@ -47,7 +45,7 @@ export class RecipeDetailComponent implements OnInit {
   }
 
   onDeleteRecipe() {
-    this.recipeService.deleteRecipe(this.id);
+    this.store.dispatch(RecipeActions.deleteRecipe(this.id));
     this.router.navigate(['/recipes']);
   }
 }
