@@ -16,7 +16,7 @@ export interface IAuthResponseData {
   registered?: boolean;
 }
 
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class AuthService {
   private tokenExpirationTimer: any;
 
@@ -101,7 +101,7 @@ export class AuthService {
     this.store.dispatch(AuthActions.userData(null));
     this.router.navigate(['/auth']);
     localStorage.removeItem('userData');
-    if(this.tokenExpirationTimer) {
+    if (this.tokenExpirationTimer) {
       clearTimeout(this.tokenExpirationTimer);
     }
     this.tokenExpirationTimer = null;

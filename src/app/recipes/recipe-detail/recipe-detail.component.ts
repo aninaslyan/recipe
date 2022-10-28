@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { Actions, ofType } from '@ngrx/effects';
+import { take } from 'rxjs/operators';
 
 import { RecipeService } from '../recipe.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
@@ -8,6 +10,7 @@ import { AppState } from '../../shared/state-helper/state.interface';
 import { getRecipe } from '../store/recipe.actions';
 import { selectRecipe } from '../store/recipe.selector';
 import { Ingredient } from '../../shared/ingredients.model';
+import * as RecipeActions from '../store/recipe.actions';
 
 @Component({
   selector: 'app-recipe-detail',
@@ -24,7 +27,9 @@ export class RecipeDetailComponent implements OnInit {
     private recipeService: RecipeService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
-    private store: Store<AppState>) {
+    private store: Store<AppState>,
+    private actions$: Actions,
+  ) {
   }
 
   onAddToShoppingList(ingredients: Ingredient[]) {
@@ -35,7 +40,9 @@ export class RecipeDetailComponent implements OnInit {
     this.activatedRoute.params
       .subscribe((params: Params) => {
         this.id = +params.id;
-        this.store.dispatch(getRecipe(this.id));
+        this.actions$.pipe(ofType(RecipeActions.fetchRecipesSuccess), take(1)).subscribe(() => {
+          this.store.dispatch(getRecipe(this.id));
+        })
       });
   }
 
